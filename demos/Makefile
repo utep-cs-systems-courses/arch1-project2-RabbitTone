@@ -26,3 +26,5 @@ clean:
 	(cd 10* && make clean)
 	(cd 11* && make clean)
 	rm -rf h lib
+reset:
+	mspdebug rf2500 "erase"
