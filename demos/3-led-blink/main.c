@@ -3,6 +3,10 @@
 #include "libTimer.h"
 #include "led.h"
 
+#define SEC 250
+#define HSEC SEC / 2      // half a second
+#define TSEC SEC * 2      // twice a second
+
 int main(void) {
   P1DIR |= LEDS;
   P1OUT &= ~LED_GREEN;
@@ -21,9 +25,9 @@ void
 __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
 {
   secondCount ++;
-  if (secondCount >= 250) { 	/* once each sec... */
+  if (secondCount >= TSEC) { 	/* once each sec... */
     secondCount = 0;		/* reset count */
-    P1OUT ^= LED_GREEN;		/* toggle green LED */
+    P1OUT ^= (LED_GREEN | LED_RED);		/* toggle green & red LED */
   }
 } 
 
