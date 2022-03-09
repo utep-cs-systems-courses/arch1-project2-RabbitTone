@@ -30,4 +30,3 @@ __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
     P1OUT ^= (LED_GREEN | LED_RED);		/* toggle green & red LED */
   }
 } 
-
