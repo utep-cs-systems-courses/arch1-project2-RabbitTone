@@ -18,8 +18,6 @@ int main(void) {
 void
 __interrupt_vec(WDT_VECTOR) WDT()	/* 250 interrupts/sec */
 {
-  for(int count = 0; count <= 100; count++){
-    P1OUT ^= LED_GREEN;
-  }
+    P1OUT ^= LED_RED;
 } 
 
