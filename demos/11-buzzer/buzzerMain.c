@@ -32,16 +32,33 @@ int main() {
 
 int secondCount = 0;
 int n = 0;
+static int curr_note = 0;
 
 void
-buzz_rising(int p){
+buzz_rising(){
   /*  secondCount++;
   if(secondCount >= 125){
     secondCount = 0;
     buzzer_set_period(oct3[p]);
   }*/
+  //  static curr_note = 0;
+  if(curr_note < 12){
+    buzzer_set_period(oct3[curr_note]);
+    curr_note++;
+  }else{
+    curr_note = 0;
+  }
+  //buzzer_set_period(oct3[p]);
+}
 
-  buzzer_set_period(oct3[p]);
+void
+buzz_descend(){
+  if(curr_note >= 0){
+    buzzer_set_period(oct3[curr_note]);
+    curr_note--;
+  }else{
+    curr_note = 11;
+  }
 }
 
 void
@@ -52,7 +69,10 @@ switch_handler(){
   P2IES &= (p2val | ~SWITCHES); /* senses switch is not pressed */
   
   if(p2val & SW1){
-    buzz_rising(1);
+    buzz_rising();
+  }
+  if(p2val & SW2){
+    buzz_descend();
   }
 }
 
